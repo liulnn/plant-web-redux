@@ -19,7 +19,7 @@ class Profile extends Component {
                 <AppBar
                     title="Plant"
                     iconElementLeft={<IconButton linkButton={true} href="#/"><ActionHome /></IconButton>}
-                    iconElementRight={<IconButton linkButton={true} href="#/settings"><ActionSettings /></IconButton>}
+                    iconElementRight={<IconButton linkButton={true} href="#/setting"><ActionSettings /></IconButton>}
                 />
                 <UserInfo user={user}/>
                 <Tabs index={2}/>
