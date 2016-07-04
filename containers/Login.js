@@ -30,7 +30,7 @@ class Login extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <AutoComplete
                         hintText="Type Username"
-                        dataSource=""
+                        dataSource={[]}
                         onUpdateInput={this.handleUpdateUsernameInput}
                         floatingLabelText="Username"
                         fullWidth={true}
