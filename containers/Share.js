@@ -9,23 +9,31 @@ import TextField from 'material-ui/TextField';
 import MapsPlace from 'material-ui/svg-icons/maps/place';
 import FileFileUpload from 'material-ui/svg-icons/file/file-upload';
 import ContentCreate from 'material-ui/svg-icons/content/create';
+import {GridList, GridTile} from 'material-ui/GridList';
 
 import FileUpload from '../components/FileUpload';
 
-import {getToken} from '../actions/qiniu';
+import {fetchUploadFile} from '../actions/qiniu';
 
 
 class Share extends Component {
-    componentWillMount() {
-        this.props.dispatch(getToken())
-    }
 
-    uploadCallback(key) {
-        console.log('heheh', key);
+    uploadCallback(file) {
+        this.props.dispatch(fetchUploadFile(file, file.name));
     }
 
     render() {
-        const {token} = this.props;
+        const {upload} = this.props;
+        var images = [];
+        for (var i = 0; i < upload.length; i++) {
+            images.push(
+                <GridTile
+                    key={upload[i].uniqueId}
+                >
+                    <img src={upload[i].sourceUrl}/>
+                </GridTile>)
+        }
+
         return (
             <div>
                 <AppBar
@@ -52,7 +60,10 @@ class Share extends Component {
                     </div>
                     <div>
                         <FileFileUpload />
-                        <FileUpload token={token} uploadCallback={this.uploadCallback.bind(this)}/>
+                        <GridList cols={6} cellHeight={200}>
+                            {images}
+                        </GridList>
+                        <FileUpload uploadCallback={this.uploadCallback.bind(this)}/>
                     </div>
                 </form>
             </div>
@@ -61,12 +72,12 @@ class Share extends Component {
 }
 
 Share.propTypes = {
-    token: PropTypes.string.isRequired
+    upload: PropTypes.array
 };
 
 function mapStateToProps(state) {
     return {
-        token: state.token
+        upload: state.upload
     }
 }
 

@@ -5,7 +5,7 @@ import moments from './moments';
 import plants from './plants';
 import user from './user';
 import isLogin from './isLogin';
-import token from './token';
+import upload from './upload';
 
 
 const rootReducer = combineReducers({
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
     plants,
     user,
     isLogin,
-    token,
+    upload,
     routing
 });
 

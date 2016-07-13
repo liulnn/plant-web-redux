@@ -18,9 +18,8 @@ function policy(bucket, key, async, expires) {
     return policy;
 }
 
-export default function getQiniuToken(bucket, key, async, expires) {
-    console.log(bucket, key, async, expires)
-    var putPolicy = policy(bucket, key, async, expires);
+export default function getQiniuToken(key) {
+    var putPolicy = policy(QINIU_CONFIG.bucket, key, true, 3000);
     var put_policy = JSON.stringify(putPolicy);
     var encoded = base64encode(utf16to8(put_policy));
     var hash = CryptoJS.HmacSHA1(encoded, QINIU_CONFIG.secretKey);
