@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import {WILDDOG_CONFIG} from '../config';
+import {dict2array} from '../utils/helper';
 
 
 export const ADD_MOMENTS = 'ADD_MOMENTS';
@@ -29,9 +30,10 @@ export function fetchGetMoments() {
         })
             .then(response => response.json())
             .then(function (json) {
-
+                json.map(function (moment) {
+                    moment.images = dict2array(moment.images)
+                });
                 dispatch(receiveGetMoments(json))
-
             })
     }
 }
