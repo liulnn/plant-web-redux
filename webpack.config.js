@@ -8,13 +8,12 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/static/'
+    filename: 'bundle.js'
   },
-  plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin()
-  ],
+  // plugins: [
+  //   new webpack.optimize.OccurrenceOrderPlugin(),
+  //   new webpack.HotModuleReplacementPlugin()
+  // ],
   module: {
     loaders: [
       {

@@ -8,13 +8,13 @@ import ActionHome from 'material-ui/svg-icons/action/home';
 import Tabs from '../components/Tabs';
 import MomentList from '../components/MomentList';
 
-import {getMoments} from '../actions/moments';
+import {fetchGetMoments} from '../actions/moments';
 
 
 class Public extends Component {
 
     componentWillMount() {
-        this.props.dispatch(getMoments([]))
+        this.props.dispatch(fetchGetMoments())
     }
 
     render() {

@@ -1,6 +1,9 @@
-export const FIREBASE_CONFIG = {
-    apiKey: "AIzaSyC1qI8bbpbPHAqE-Rfwy24ZyoXOfGyBMzw",
-    authDomain: "plant-330a1.firebaseapp.com",
-    databaseURL: "https://plant-330a1.firebaseio.com",
-    storageBucket: "plant-330a1.appspot.com",
+export const QINIU_CONFIG = {
+    accessKey: '6jrAd1On5S76VXM1gQNTZ8K7Xb1zeXll8y4njiB5',
+    secretKey: 'B2Js_4Z2Rkm4oEgZPpm4ONxHO8iUchp7AqJCN8LH'
+};
+
+export const WILDDOG_CONFIG = {
+    databaseURL: "https://plant.wilddogio.com",
+    secretKey: 'SqLImcfH568funrgCy6H5gvRQxePgNWWueGqpuQs'
 };
