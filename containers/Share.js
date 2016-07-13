@@ -37,7 +37,7 @@ class Share extends Component {
         return (
             <div>
                 <AppBar
-                    iconElementLeft={<IconButton linkButton={true} href="#/"><NavigationArrowBack /></IconButton>}
+                    iconElementLeft={<IconButton href="#/"><NavigationArrowBack /></IconButton>}
                     iconElementRight={<FlatButton label="Send" />}
                 />
                 <form>

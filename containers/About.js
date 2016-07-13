@@ -12,7 +12,7 @@ class About extends Component {
             <div>
                 <AppBar
                     title="Plant"
-                    iconElementLeft={<IconButton linkButton={true} href="#/"><ActionHome /></IconButton>}
+                    iconElementLeft={<IconButton href="#/"><ActionHome /></IconButton>}
                 />
                 About
             </div>

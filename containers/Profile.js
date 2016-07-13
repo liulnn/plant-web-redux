@@ -18,8 +18,8 @@ class Profile extends Component {
             <div>
                 <AppBar
                     title="Plant"
-                    iconElementLeft={<IconButton linkButton={true} href="#/"><ActionHome /></IconButton>}
-                    iconElementRight={<IconButton linkButton={true} href="#/setting"><ActionSettings /></IconButton>}
+                    iconElementLeft={<IconButton href="#/"><ActionHome /></IconButton>}
+                    iconElementRight={<IconButton href="#/setting"><ActionSettings /></IconButton>}
                 />
                 <UserInfo user={user}/>
                 <Tabs index={2}/>

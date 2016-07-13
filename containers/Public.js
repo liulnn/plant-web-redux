@@ -23,8 +23,8 @@ class Public extends Component {
             <div>
                 <AppBar
                     title="Plant"
-                    iconElementLeft={<IconButton linkButton={true} href="#/"><ActionHome /></IconButton>}
-                    iconElementRight={<IconButton linkButton={true} href="#/share"><ContentAdd /></IconButton>}
+                    iconElementLeft={<IconButton href="#/"><ActionHome /></IconButton>}
+                    iconElementRight={<IconButton href="#/share"><ContentAdd /></IconButton>}
                 />
                 <MomentList moments={moments}/>
                 <Tabs index={1}/>

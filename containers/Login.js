@@ -47,7 +47,6 @@ class Login extends Component {
                     <FlatButton
                         label="Login"
                         primary={true}
-                        // linkButton={true}
                         // href="#/"
                         type="submit"
                     />

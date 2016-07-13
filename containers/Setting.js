@@ -24,7 +24,7 @@ class Setting extends Component {
             <div>
                 <AppBar
                     title="Plant"
-                    iconElementLeft={<IconButton linkButton={true} href="#/"><ActionHome /></IconButton>}
+                    iconElementLeft={<IconButton href="#/"><ActionHome /></IconButton>}
                 />
                 <List>
                     <Subheader>Priority Interruptions</Subheader>
@@ -41,12 +41,12 @@ class Setting extends Component {
                 </List>
                 <Divider />
                 <List>
-                    <ListItem primaryText="About" linkButton containerElement={<Link to="/about" />}/>
+                    <ListItem primaryText="About" containerElement={<Link to="/about" />}/>
                 </List>
                 <Divider />
                 <div>
                     <List>
-                        <ListItem primaryText="Logout" linkButton onTouchTap={this.logout}/>
+                        <ListItem primaryText="Logout" onTouchTap={this.logout}/>
                     </List>
                 </div>
             </div>

@@ -24,7 +24,7 @@ class Gallery extends Component {
             <div>
                 <AppBar
                     title="Plant"
-                    iconElementLeft={<IconButton linkButton={true} href="#/"><ActionHome /></IconButton>}
+                    iconElementLeft={<IconButton href="#/"><ActionHome /></IconButton>}
                     iconElementRight={<IconButton><ActionSearch /></IconButton>}
                 />
                 <PlantList plants={plants}/>
