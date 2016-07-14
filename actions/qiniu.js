@@ -5,8 +5,6 @@ import fetch from 'isomorphic-fetch';
 import getQiniuToken from '../libs/qiniu'
 import {QINIU_CONFIG} from '../config'
 
-const UPLOAD_FILE_PATH = 'http://up.qiniu.com';
-
 
 export function requestUploadFile() {
     return {
@@ -29,14 +27,14 @@ export function fetchUploadFile(file, key) {
         form.append('file', file);
         form.append('token', getQiniuToken(key));
         form.append('key', key);
-        return fetch(UPLOAD_FILE_PATH, {
+        return fetch(QINIU_CONFIG.uploadDomain, {
             method: 'POST',
             body: form,
             mode: 'cors'
         })
             .then(response => response.json())
             .then(function (json) {
-                dispatch(receiveUploadFile(json.key, QINIU_CONFIG.domain + json.key))
+                dispatch(receiveUploadFile(json.key, QINIU_CONFIG.fileDomain + json.key))
             })
     }
 }

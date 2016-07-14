@@ -1,7 +1,8 @@
 export const QINIU_CONFIG = {
     accessKey: '6jrAd1On5S76VXM1gQNTZ8K7Xb1zeXll8y4njiB5',
     secretKey: 'B2Js_4Z2Rkm4oEgZPpm4ONxHO8iUchp7AqJCN8LH',
-    domain: 'http://o9x8bull0.bkt.clouddn.com/',
+    fileDomain: 'http://o9x8bull0.bkt.clouddn.com/',
+    uploadDomain: 'https://up.qbox.me',
     bucket: 'plant'
 };
 
