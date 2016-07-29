@@ -14,12 +14,18 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import FileUpload from '../components/FileUpload';
 
 import {fetchUploadFile} from '../actions/qiniu';
+import {fetchAddMoment} from '../actions/moments';
 
 
 class Share extends Component {
 
     uploadCallback(file) {
         this.props.dispatch(fetchUploadFile(file, file.name));
+    }
+
+    handleSubmit(event, target) {
+        console.log(event, target);
+        // this.props.dispatch(fetchAddMoment('test', this.refs.content.input.value, this.refs.place.input.value, this.props.upload));
     }
 
     render() {
@@ -38,7 +44,7 @@ class Share extends Component {
             <div>
                 <AppBar
                     iconElementLeft={<IconButton href="#/"><NavigationArrowBack /></IconButton>}
-                    iconElementRight={<FlatButton label="Send" />}
+                    iconElementRight={<FlatButton label="Send" onTouchTap={this.handleSubmit.bind(this)}/>}
                 />
                 <form>
                     <div>
@@ -59,10 +65,10 @@ class Share extends Component {
                         />
                     </div>
                     <div>
-                        <FileFileUpload />
                         <GridList cols={6} cellHeight={200}>
                             {images}
                         </GridList>
+                        <FileFileUpload />
                         <FileUpload uploadCallback={this.uploadCallback.bind(this)}/>
                     </div>
                 </form>
@@ -72,12 +78,14 @@ class Share extends Component {
 }
 
 Share.propTypes = {
-    upload: PropTypes.array
+    upload: PropTypes.array,
+    share: PropTypes.object
 };
 
 function mapStateToProps(state) {
     return {
-        upload: state.upload
+        upload: state.upload,
+        share: state.share
     }
 }
 

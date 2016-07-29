@@ -6,6 +6,7 @@ import plants from './plants';
 import user from './user';
 import isLogin from './isLogin';
 import upload from './upload';
+import share from './share';
 
 
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     user,
     isLogin,
     upload,
+    share,
     routing
 });
 
