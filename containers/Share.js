@@ -4,12 +4,14 @@ import {connect} from 'react-redux'
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import MapsPlace from 'material-ui/svg-icons/maps/place';
 import FileFileUpload from 'material-ui/svg-icons/file/file-upload';
 import ContentCreate from 'material-ui/svg-icons/content/create';
 import {GridList, GridTile} from 'material-ui/GridList';
+
+import Formsy from 'formsy-react';
+import {FormsyText} from 'formsy-material-ui/lib';
 
 import FileUpload from '../components/FileUpload';
 
@@ -23,9 +25,13 @@ class Share extends Component {
         this.props.dispatch(fetchUploadFile(file, file.name));
     }
 
-    handleSubmit(event, target) {
-        console.log(event, target);
-        // this.props.dispatch(fetchAddMoment('test', this.refs.content.input.value, this.refs.place.input.value, this.props.upload));
+    handleSubmit(data) {
+        var upload = this.props.upload;
+        var images = [];
+        for (var i = 0; i < upload.length; i++) {
+            images.push({source: upload[i].sourceUrl});
+        }
+        this.props.dispatch(fetchAddMoment('test', data.content, data.place, images));
     }
 
     render() {
@@ -42,26 +48,28 @@ class Share extends Component {
 
         return (
             <div>
-                <AppBar
-                    iconElementLeft={<IconButton href="#/"><NavigationArrowBack /></IconButton>}
-                    iconElementRight={<FlatButton label="Send" onTouchTap={this.handleSubmit.bind(this)}/>}
-                />
-                <form>
+                <Formsy.Form
+                    onValidSubmit={this.handleSubmit.bind(this)}
+                >
+                    <AppBar
+                        iconElementLeft={<IconButton href="#/"><NavigationArrowBack /></IconButton>}
+                        iconElementRight={<RaisedButton label="Send" type="submit" />}
+                    />
                     <div>
                         <ContentCreate />
-                        <TextField
+                        <FormsyText
                             name="content"
-                            multiLine={true}
+                            required
                             hintText="Write what you want to share!"
-                            ref="content"
+                            multiLine={true}
                         />
                     </div>
                     <div>
                         <MapsPlace />
-                        <TextField
+                        <FormsyText
                             name="place"
+                            required
                             hintText="Write your address"
-                            ref="place"
                         />
                     </div>
                     <div>
@@ -71,7 +79,7 @@ class Share extends Component {
                         <FileFileUpload />
                         <FileUpload uploadCallback={this.uploadCallback.bind(this)}/>
                     </div>
-                </form>
+                </Formsy.Form>
             </div>
         )
     }

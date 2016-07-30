@@ -31,10 +31,11 @@ export function fetchGetMoments() {
         })
             .then(response => response.json())
             .then(function (json) {
-                json.map(function (moment) {
+                var moments = dict2array(json, 'mid');
+                moments.map(function (moment) {
                     moment.images = dict2array(moment.images)
                 });
-                dispatch(receiveGetMoments(json))
+                dispatch(receiveGetMoments(moments))
             })
     }
 }
@@ -45,29 +46,27 @@ export function requestAddMoment() {
     }
 }
 
-export function receiveAddMoment(mid) {
+export function receiveAddMoment() {
     return {
-        type: RECEIVE_ADD_MOMENT,
-        mid: mid
+        type: RECEIVE_ADD_MOMENT
     }
 }
 
 export function fetchAddMoment(uid, content, place, images) {
     return dispatch => {
         dispatch(requestAddMoment());
-        var form = new FormData();
-        form.append('uid', uid);
-        form.append('content', content);
-        form.append('place', place);
-        form.append('images', images);
         return fetch(MOMENT_PATH, {
             method: 'POST',
-            body: form,
-            mode: 'cors'
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify({
+                author: uid,
+                avatar: 'http://lorempixel.com/600/339/nature/',
+                content: content,
+                address: place,
+                images: images
+            }),
+            mode: 'no-cors'
         })
-            .then(response => response.json())
-            .then(function (json) {
-                dispatch(receiveAddMoment(json))
-            })
+            .then(response => dispatch(receiveAddMoment()));
     }
 }
