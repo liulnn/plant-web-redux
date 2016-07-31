@@ -12,6 +12,6 @@ export function login(username, password) {
 export function getUser(user) {
     return {
         type: GET_USER,
-        user: _user
+        user: user
     }
 }

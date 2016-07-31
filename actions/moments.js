@@ -10,7 +10,7 @@ export const RECEIVE_ADD_MOMENT = 'RECEIVE_ADD_MOMENT'
 export const CLOSE_TOAST = 'CLOSE_TOAST';
 
 
-const MOMENT_PATH = WILDDOG_CONFIG.databaseURL + '/server/plant/moments.json' + '?auth=' + WILDDOG_CONFIG.secretKey;
+const MOMENT_PATH = WILDDOG_CONFIG.databaseURL + '/server/plant/moments.json?';
 
 function requestGetMoments() {
     return {
@@ -28,8 +28,13 @@ function receiveGetMoments(moments) {
 export function fetchGetMoments() {
     return dispatch => {
         dispatch(requestGetMoments());
-        return fetch(MOMENT_PATH, {
+        var u = new URLSearchParams();
+        u.append('auth', WILDDOG_CONFIG.secretKey);
+        u.append('orderBy', '"$key"');
+        u.append('limitToLast', 10);
+        return fetch(MOMENT_PATH + u, {
             mode: 'cors'
+            
         })
             .then(response => response.json())
             .then(function (json) {
@@ -64,7 +69,9 @@ export function closeToast() {
 export function fetchAddMoment(uid, content, place, images) {
     return dispatch => {
         dispatch(requestAddMoment());
-        return fetch(MOMENT_PATH, {
+        var u = new URLSearchParams();
+        u.append('auth', WILDDOG_CONFIG.secretKey);
+        return fetch(MOMENT_PATH + u, {
             method: 'POST',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify({

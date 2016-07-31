@@ -16,10 +16,10 @@ export default class Moment extends Component {
                     avatar={this.props.avatar}
                 />
                 <div>
-                    <GridList cellHeight={50}>
+                    <GridList cellHeight={50} style={{width: '130px'}}>
                         {this.props.images.map((image) => (
                             <GridTile key={image.source}>
-                                <img src={image.source}/>
+                                <img src={image.source} />
                             </GridTile>
                         ))}
                     </GridList>
