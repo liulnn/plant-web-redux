@@ -6,7 +6,9 @@ import {dict2array} from '../utils/helper';
 export const REQUEST_GET_MOMENTS = 'REQUEST_GET_MOMENTS';
 export const RECEIVE_GET_MOMENTS = 'RECEIVE_GET_MOMENTS';
 export const REQUEST_ADD_MOMENT = 'REQUEST_ADD_MOMENT';
-export const RECEIVE_ADD_MOMENT = 'RECEIVE_ADD_MOMENT';
+export const RECEIVE_ADD_MOMENT = 'RECEIVE_ADD_MOMENT'
+export const CLOSE_TOAST = 'CLOSE_TOAST';
+
 
 const MOMENT_PATH = WILDDOG_CONFIG.databaseURL + '/server/plant/moments.json' + '?auth=' + WILDDOG_CONFIG.secretKey;
 
@@ -46,9 +48,16 @@ export function requestAddMoment() {
     }
 }
 
-export function receiveAddMoment() {
+export function receiveAddMoment(response) {
     return {
-        type: RECEIVE_ADD_MOMENT
+        type: RECEIVE_ADD_MOMENT,
+        response: response
+    }
+}
+
+export function closeToast() {
+    return {
+        type: CLOSE_TOAST
     }
 }
 
@@ -65,8 +74,8 @@ export function fetchAddMoment(uid, content, place, images) {
                 address: place,
                 images: images
             }),
-            mode: 'no-cors'
+            mode: 'cors'
         })
-            .then(response => dispatch(receiveAddMoment()));
+            .then(response => dispatch(receiveAddMoment(response)));
     }
 }

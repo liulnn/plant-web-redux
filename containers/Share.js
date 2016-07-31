@@ -13,10 +13,11 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import Formsy from 'formsy-react';
 import {FormsyText} from 'formsy-material-ui/lib';
 
-import FileUpload from '../components/FileUpload';
+import FileUpload from '../common/components/FileUpload';
+import Toast from '../common/components/Toast';
 
 import {fetchUploadFile} from '../actions/qiniu';
-import {fetchAddMoment} from '../actions/moments';
+import {fetchAddMoment, closeToast} from '../actions/moments';
 
 
 class Share extends Component {
@@ -34,8 +35,13 @@ class Share extends Component {
         this.props.dispatch(fetchAddMoment('test', data.content, data.place, images));
     }
 
+    toastClose() {
+        this.props.dispatch(closeToast());
+        this.context.router.push('/public');
+    }
+
     render() {
-        const {upload} = this.props;
+        const {upload, share} = this.props;
         var images = [];
         for (var i = 0; i < upload.length; i++) {
             images.push(
@@ -44,6 +50,14 @@ class Share extends Component {
                 >
                     <img src={upload[i].sourceUrl}/>
                 </GridTile>)
+        }
+        var toastOpen = false;
+        var toastMessage = '分享成功!';
+        if (share.response) {
+            toastOpen = true;
+            if (!share.response.ok) {
+                toastMessage = '分享失败!';
+            }
         }
 
         return (
@@ -80,6 +94,12 @@ class Share extends Component {
                         <FileUpload uploadCallback={this.uploadCallback.bind(this)}/>
                     </div>
                 </Formsy.Form>
+                <Toast
+                    open={toastOpen}
+                    message={toastMessage}
+                    autoHideDuration={2000}
+                    onRequestClose={this.toastClose.bind(this)}
+                />
             </div>
         )
     }
@@ -88,6 +108,9 @@ class Share extends Component {
 Share.propTypes = {
     upload: PropTypes.array,
     share: PropTypes.object
+};
+Share.contextTypes = {
+    router: React.PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
